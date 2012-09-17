@@ -11,13 +11,8 @@ organization := "net.vz.play.statsd"
 scalaVersion := "2.9.1"
 
 resolvers ++= Seq(
-    DefaultMavenRepository,
-    Resolver.url("Play", url("http://download.playframework.org/ivy-releases/"))(Resolver.ivyStylePatterns),
-    Resolver.url("GitHub", url("https://github.com/fooblahblah/maven-repo.git"))(Resolver.ivyStylePatterns),
-    "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/",
-    "Typesafe Other Repository" at "http://repo.typesafe.com/typesafe/repo/",
-    Resolver.url("sbt-plugin-releases", url("http://scalasbt.artifactoryonline.com/scalasbt/sbt-plugin-releases/"))(Resolver.ivyStylePatterns),
-    Resolver.url("Play-custom", url("https://github.com/fooblahblah/maven-repo/raw/master/releases"))(Resolver.ivyStylePatterns)
+  "livingsocial" at "http://localhost:8081/artifactory/repo",
+  Resolver.url("livingsocial-ivy", url("http://artifacts.livingsocial.net/artifactory/repo"))(Resolver.ivyStylePatterns)
 )
 
 // Dependencies
@@ -34,46 +29,3 @@ libraryDependencies ++= Seq(
 )
 
 parallelExecution in Test := false
-
-// Configuration required for deploying to sonatype
-
-publishMavenStyle := true
-
-publishTo <<= version { (v: String) =>
-  val nexus = "https://oss.sonatype.org/"
-  if (v.trim.endsWith("SNAPSHOT"))
-    Some("snapshots" at nexus + "content/repositories/snapshots")
-  else
-    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
-}
-
-pomIncludeRepository := { _ => false }
-
-publishArtifact in Test := false
-
-pomExtra := (
-  <url>http://github.com/vznet/play-statsd</url>
-  <inceptionYear>2012</inceptionYear>
-  <licenses>
-    <license>
-      <name>Apache 2</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
-      <comments>A business-friendly OSS license</comments>
-    </license>
-  </licenses>
-  <scm>
-    <url>git@github.com:vznet/play-statsd.git</url>
-    <connection>scm:git:git@github.com:vznet/play-statsd.git</connection>
-  </scm>
-  <developers>
-    <developer>
-      <name>James Roper</name>
-      <email>james@jazzy.id.au</email>
-      <url>http://jazzy.id.au</url>
-      <roles>
-        <role>Author</role>
-      </roles>
-      <organization>VZ Netzwerke</organization>
-    </developer>
-  </developers>)
