@@ -11,21 +11,21 @@ organization := "net.vz.play.statsd"
 scalaVersion := "2.9.1"
 
 resolvers ++= Seq(
-  "livingsocial" at "http://localhost:8081/artifactory/repo",
+  "livingsocial" at "http://artifacts.livingsocial.net/artifactory/repo",
   Resolver.url("livingsocial-ivy", url("http://artifacts.livingsocial.net/artifactory/repo"))(Resolver.ivyStylePatterns)
 )
 
 // Dependencies
 
 libraryDependencies ++= Seq(
-    "play" %% "play" % "2.0.3.1"
+    "play" %% "play" % "2.0.4.1"
 )
 
 // Test dependencies
 
 libraryDependencies ++= Seq(
     "org.specs2" %% "specs2" % "1.9" % "test",
-    "play" %% "play-test" % "2.0.3.1" % "test"
+    "play" %% "play-test" % "2.0.4.1" % "test"
 )
 
 parallelExecution in Test := false
